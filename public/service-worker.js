@@ -13,7 +13,6 @@ this.addEventListener('install', event => {
         '/assets/icon-48.png',
         '/assets/icon-512.png',
         '/assets/icon-96.png',
-        '/bundle.js',
         '/css/styles.css',
         '/css/normalize.css',
         '/js/scripts.js',
@@ -44,3 +43,13 @@ this.addEventListener('activate', (event) => {
     }).then(() => clients.claim())
   );
 });
+
+this.addEventListener('message', (event) => {
+  if (event.data.type === 'add-palette') {
+    self.registration.showNotification('Palette added');
+  }
+});
+
+  return Promise.all(markdownPromises);
+};
+

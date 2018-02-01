@@ -1,9 +1,9 @@
 {
   "short_name": "Palette Picker",
   "name": "World's greatest color picker",
-  "background_color": "#ddd",
-  "theme_color": "#bbb",
-  "display": "fullscreen",
+  "background_color": "#dddddd",
+  "theme_color": "#bbbbbb",
+  "display": "standalone",
   "icons": [
     {
       "src": "assets/icon-48.png",
