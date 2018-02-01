@@ -165,9 +165,16 @@ const savePalette = async () => {
     const newPalette = await createNewPalette(id, color1, color2, color3, color4, color5);
     
     createPaletteInProject(newPalette.project_id, newPalette.id, color1, color2, color3, color4, color5);
+    paletteNotification();
   } else {
     $('.error-message').text('Please choose project name first.');
   }
+};
+
+const paletteNotification = () => {
+  navigator.serviceWorker.controller.postMessage({
+    type: 'add-palette'
+  });
 };
 
 async function switchProjects() {
@@ -399,3 +406,22 @@ $('header').on('click', '.header-button', createProject);
 $('header').on('change', 'select', switchProjects);
 $('header').on('click', '.delete-project-button', deleteProject);
 $('article').on('click', '.palette-colors', sendToTop);
+
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('../service-worker.js')
+      .then(() => navigator.serviceWorker.ready)
+      .then(() => {
+        Notification.requestPermission();
+        // eslint-disable-next-line no-console
+        console.log('ServiceWorker registration successful');
+      }).catch(err => {
+        // eslint-disable-next-line no-console
+        console.log(`ServiceWorker registration failed: ${err}`);
+      });
+  });
+}
+
+
+
